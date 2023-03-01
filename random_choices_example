@@ -1,0 +1,14 @@
+import numpy as np 
+
+# %% 
+m = np.array(matrix)
+# %%
+a = np.array([0,1,0,0,0,0])
+# %%
+a.dot(m)
+# %%
+dest = list(matrix.columns)
+# %%
+np.random.choice(dest, 1, p=list(matrix.loc['entrance']))
+
+# %%

@@ -1,0 +1,20 @@
+moritz: 
+	- add functions from EDA to utils.py
+	- make sure functions work with all of us
+	- create useful file system
+	- sort out the master and branch merging 
+
+maryam:
+
+himansu:
+
+all:
+	- add our code to workflow and make sure it works
+	- add shift? as function?
+	- transform 'shifted' table to prob matrix
+
+	- create supermarket class
+	- create customer class
+	- set week-goal
+	- teammeeting!!!
+	

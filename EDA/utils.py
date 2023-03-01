@@ -3,6 +3,7 @@
 # Import 
 import os
 import pandas as pd
+import numpy as np
 #%%
 
 # function: read in files 

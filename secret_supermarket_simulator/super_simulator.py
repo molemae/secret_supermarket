@@ -10,3 +10,4 @@ if __name__ == "__main__":
         sec_super.next_minute()
         sec_super.print_customers()
         sec_super.remove_exitsting_customers()
+# %%

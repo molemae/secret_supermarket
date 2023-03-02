@@ -10,15 +10,17 @@ class Supermarket:
     """manages multiple Customer instances that are currently in the market.
     """
 
-    def __init__(self, name):        
+    def __init__(self, name, matrix):        
         # a list of Customer objects
         self.customers = []
         self.minutes = 0
         self.last_id = 0
         self.name = name
+        self.matrix = matrix
+        self.locations = list()
 
     def __repr__(self):
-        return ''
+        return 'The current time is supermarket '
 
     def is_open(self):
         return self.get_time() != "22:00"
@@ -46,12 +48,13 @@ class Supermarket:
         """
         self.minutes = self.minutes + 1
         for customer in self.customers:
-            customer.next_location()
+            customer.next_location(self.matrix)
         return None
     
     def add_new_customers(self):
-        """randomly creates new customers.
-        """
+        self.last_id += 1
+        self.customers.append(Customer(self.last_id,'entrance'))
+
         return None
 
     def remove_exitsting_customers(self):

@@ -1,11 +1,5 @@
-# %%
-"""
-Start with this to implement the supermarket simulator.
-"""
-
-import numpy as np
-import pandas as pd
 from customer import Customer
+import pandas as pd
 
 class Supermarket:
     """manages multiple Customer instances that are currently in the market.
@@ -35,7 +29,7 @@ class Supermarket:
         timestamp = f"{hour:02d}:{minutes:02d}" 
         return timestamp
 
-    def print_customers(self):
+    def print_customers(self,filename):
         """print all customers with the current time, id, location in CSV format.
         """
         cus_df = pd.DataFrame(columns=['time','id','location'])
@@ -47,7 +41,7 @@ class Supermarket:
                 'location':[customer.location]
             }
             cur_cus = pd.DataFrame.from_dict(cur_dict)
-            cus_df = pd.concat([cus_df,cur_cus]).to_csv('../out/sim_output.csv',mode='a')
+            cus_df = pd.concat([cus_df,cur_cus]).to_csv(f'../data/out/{filename}.csv',header=False,mode='a')
 
         return cus_df
 
@@ -56,21 +50,25 @@ class Supermarket:
         """
         self.minutes = self.minutes + 1
         for customer in self.customers:
-            customer.next_location(customer.location)
+            customer.next_location()
         return None
     
     def add_new_customers(self):
+        '''Adds new customer for every minute. 
+        TODO: using poisson distribiution instead of always one new
+        '''
         self.last_id += 1
-        self.customers.append(Customer(self.last_id,'entrance'))
+        self.customers.append(Customer(self.last_id))
 
         return None
 
     def remove_exitsting_customers(self):
         """removes every customer that is not active any more.
         """
+        for customer in self.customers:
+            if not customer.active:
+                self.customers.remove(customer)
         return None
 
-# if __name__ == "__main__":
-    # Lidl = Supermarket("LIDL")
-    # print(Lidl.get_time())
-# %%
+
+

@@ -1,3 +1,4 @@
+# %%
 """
 Start with this to implement the supermarket simulator.
 """
@@ -10,18 +11,19 @@ class Supermarket:
     """manages multiple Customer instances that are currently in the market.
     """
 
-    def __init__(self, name, matrix):        
+    def __init__(self, name):        
         # a list of Customer objects
         self.customers = []
         self.minutes = 0
         self.last_id = 0
         self.name = name
-        self.matrix = matrix
-        self.locations = list()
 
     def __repr__(self):
-        return 'The current time is supermarket '
-
+        if self.is_open():
+            return f'''It is {self.get_time()}: the Supermarket {self.name} currently has {len(self.customers)} customers.'''
+        else:
+            return 'The Supermarket is closed now.'
+        
     def is_open(self):
         return self.get_time() != "22:00"
 
@@ -36,19 +38,25 @@ class Supermarket:
     def print_customers(self):
         """print all customers with the current time, id, location in CSV format.
         """
-        printlist = []
+        cus_df = pd.DataFrame(columns=['time','id','location'])
+        cur_time = self.get_time()
         for customer in self.customers:
-            cus_string = f"The customer {customer.id} is at {customer.location} at {self.get_time()}."
-            printlist.append(cus_string)
+            cur_dict = {
+                'time':[cur_time],
+                'id':[customer.id],
+                'location':[customer.location]
+            }
+            cur_cus = pd.DataFrame.from_dict(cur_dict)
+            cus_df = pd.concat([cus_df,cur_cus]).to_csv('../out/sim_output.csv',mode='a')
 
-        return printlist
+        return cus_df
 
     def next_minute(self):
         """propagates all customers to the next state.
         """
         self.minutes = self.minutes + 1
         for customer in self.customers:
-            customer.next_location(self.matrix)
+            customer.next_location(customer.location)
         return None
     
     def add_new_customers(self):
@@ -65,3 +73,4 @@ class Supermarket:
 # if __name__ == "__main__":
     # Lidl = Supermarket("LIDL")
     # print(Lidl.get_time())
+# %%

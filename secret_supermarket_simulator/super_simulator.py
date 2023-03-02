@@ -2,7 +2,7 @@
 from supermarket_start import Supermarket
 
 sec_super = Supermarket("Secret_Supermarket")
-# %%
+
 if __name__ == "__main__":
     
     while sec_super.is_open():

@@ -4,11 +4,11 @@
 import numpy as np
 import pandas as pd
 
-matrix = pd.read_csv('../data/transition_matrix.csv')
-matrix.info()
-matrix.set_index('location',inplace= True)
-locations = matrix.index
-pmatrix = np.array(matrix)
+matrix_in = pd.read_csv('../data/transition_matrix.csv')
+matrix_in.info()
+matrix_in.set_index('location',inplace= True)
+locations_in = matrix_in.index
+pmatrix = np.array(matrix_in)
 
 # %%
 
@@ -31,7 +31,7 @@ class Customer:
         return f"Customer {self.id} is at {self.location}."
 
     def next_location(self,locations,matrix):
-        self.location = np.random.choice(locations, 1, p=list(matrix.loc[self.location]))
+        self.location = np.random.choice(locations, 1, p=list(matrix.loc[self.location]))[0]
         return self.location
     
 

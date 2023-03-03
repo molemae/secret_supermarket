@@ -1,2 +1,7 @@
 test.txt
 transition_prob.ipynb
+
+secret_supermarket_simulator/__pycache__/customer.cpython-310.pyc
+secret_supermarket_simulator/__pycache__/supermarket_start.cpython-310.pyc
+.DS_Store
+data/.DS_Store

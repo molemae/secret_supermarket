@@ -1,9 +1,15 @@
+
 from customer import Customer
+import numpy as np
+import pandas as pd
+
+matrix = pd.read_pickle('../data/entry_prob')
+matrix
 
 class Supermarket:
     """manages multiple Customer instances that are currently in the market.
     """
-
+    DISTRIBIUTION = matrix.copy()
     def __init__(self, name):        
         # a list of Customer objects
         self.customers = []
@@ -46,10 +52,13 @@ class Supermarket:
     
     def add_new_customers(self):
         '''Adds new customer for every minute. 
-        TODO: using poisson distribiution instead of always one new
         '''
-        self.last_id += 1
-        self.customers.append(Customer(self.last_id))
+        P = Supermarket.DISTRIBIUTION
+        
+        n  = np.random.choice(a=np.array(P['New_Cus_per_min']),p=np.array(P['Prob']))
+        for i in range(n):
+            self.last_id += 1
+            self.customers.append(Customer(self.last_id))
 
         return None
 

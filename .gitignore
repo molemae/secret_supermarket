@@ -1,4 +1,1 @@
-test.txt
-transition_prob.ipynb
-
-/secret_supermarket_simulator/__pycache__/
+secret_supermarket_simulator/__pycache__/*.pyc

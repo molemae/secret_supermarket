@@ -19,7 +19,7 @@ class Supermarket:
             return 'The Supermarket is closed now.'
         
     def is_open(self):
-        return self.get_time() != "22:00"
+        return self.get_time() != "10:00"
 
     def get_time(self):
         """current time in HH:MM format,
@@ -49,8 +49,15 @@ class Supermarket:
         """propagates all customers to the next state.
         """
         self.minutes = self.minutes + 1
-        for customer in self.customers:
-            customer.next_location()
+        if self.is_open():
+            for customer in self.customers:
+                customer.next_location()
+        else:
+            for customer in self.customers:
+                print(f'removing last customers:{customer}')
+                customer.location = 'checkout'
+                customer.active = False
+                self.remove_exitsting_customers()
         return None
     
     def add_new_customers(self):

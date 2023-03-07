@@ -1,1 +1,3 @@
 secret_supermarket_simulator/__pycache__/*.pyc
+.DS_Store
+data/.DS_Store

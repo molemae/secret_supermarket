@@ -8,10 +8,9 @@ df = resample_cus(df)
 df = add_entr_checkout(df)
 matrix = transition_probbability_matrix(df)
 
-matrix
-
 
 # %%
+# pickle cleaned data
 df.to_pickle('../data/cus_concat_res_entr_checkout')
 
 # %%

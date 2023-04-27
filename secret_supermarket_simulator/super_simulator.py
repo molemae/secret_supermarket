@@ -1,5 +1,5 @@
 # %%
-from supermarket_start import Supermarket
+from supermarket import Supermarket
 
 sec_super = Supermarket("Secret_Supermarket")
 

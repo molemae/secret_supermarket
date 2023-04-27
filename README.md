@@ -1,0 +1,1 @@
+Simulation of customer behavior in a supermarket using a Monte Carlo Markov Chain. This project was part of Group project at the Spiced Data Science boot camp exploring Simulations, colaboration on GitHub and Building Classes in Python. 

@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 #%%
 
-# function: read in files 
+# read and concat daily files customer location files
 def read_concat(path='data/customer/',date_col='timestamp'):
     """ Read in csv-files in subfolder, set datetime to index, 
      give new customer_no, concat all data_frames into one."""    
@@ -29,7 +29,7 @@ def read_concat(path='data/customer/',date_col='timestamp'):
     df_all = df_all.sort_index()
     return df_all
 
-# Resampling 
+# Resampling customer data
 def resample_cus(df):
     ''' Resampling the input data to get one data point per minute per customer '''
     df = df.groupby('customer_no').resample('1T').ffill()
@@ -37,9 +37,6 @@ def resample_cus(df):
     return df
 
 # %%
-
-
-
 # add entrance row and checkout row if it is missing:
 def add_entr_checkout(df):
     """ Add entrance row and checkout if checkout is missing"""
@@ -74,17 +71,17 @@ def add_entr_checkout(df):
     # return out
     return out
 
+# calculate transition probability matrix:
+def transition_probability_matrix(df):
+    """ Calculate transition probability matrix from Customer locations and movement."""
 
-def transition_probbability_matrix(dataframe):
-    df = dataframe
-
-    '''This line making a new column in our dataframe with shifting the column 'location' to up'''
+    # create new column to containing the previous location
     df['location2'] = df['location'].shift(-1)
 
-    '''The location2 needs some cleaning, replacing entrance with chechout. '''
+    # Cleaning: Replacing entrance and NaN with checkout
     df['location2'].replace(to_replace='entrance', value='checkout', inplace=True)
     df['location2'].replace(to_replace= np.nan, value='checkout', inplace=True)
 
-    '''Here we creat the transition matrix (probability matrix)'''
+    # Calculate the transition probabtility matrix 
     mat = pd.crosstab(df['location'], df['location2'], normalize=0)
     return mat

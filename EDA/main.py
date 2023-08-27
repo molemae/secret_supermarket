@@ -16,11 +16,6 @@ df = add_entr_checkout(df)
 # Calculate transition p
 matrix = transition_probability_matrix(df)
 
-
-# %%
-# pickle cleaned data
-# df.to_pickle('../data/transition_matrix.pkl')
-
 # %%
 # save transition probability matrix to csv
 matrix.to_csv('../data/transition_matrix.csv')
